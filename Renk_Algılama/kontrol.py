@@ -12,22 +12,17 @@ args = vars(ap.parse_args())
 img_path = args['image']
 
 #OpenCv ile görüntü okuma işlemi gerçekleşir. Eğer görüntüde sıkıntı çıkarsa boş matris döndürme işlemi yapar
-
-
 img = cv2.imread(img_path)
-
 #matris için değişkenler
 clicked = False
 r = g = b = xpos = ypos = 0
-
 #.csv (excel) dosyalarının pandas ile okunmasını sağlamak
 #Csv dosyasını pandalarla okuma ve her sütuna ad verme
 index=["color","color_name","hex","R","G","B"]
 csv = pd.read_csv('colors.csv', names=index, header=None)
 
-
 #fonksiyon tüm renklerden minimum mesafeyi hesaplamak ve en uygun rengi elde etmek için
-def getColorName(R,G,B):
+def renk(R,G,B):
     minimum = 10000
     for i in range(len(csv)):
         d = abs(R- int(csv.loc[i,"R"])) + abs(G- int(csv.loc[i,"G"]))+ abs(B- int(csv.loc[i,"B"]))
@@ -38,10 +33,7 @@ def getColorName(R,G,B):
 
 #Renk adını algılamak ve göstermek için mouse bir görüntünün üzerine geldiğinde bir geri arama etkinliği ayarlayın.
 
-
-#function fare çift tıklama x, y koordinatları almak için
-
-def draw_function(event, x,y,flags,param):
+def draw(event, x,y,flags,param):
     if event == cv2.EVENT_LBUTTONDBLCLK:
         global b,g,r,xpos,ypos, clicked
         clicked = True
@@ -54,7 +46,7 @@ def draw_function(event, x,y,flags,param):
        
  # Renk adını algılamak ve göstermek için fare bir görüntünün üzerine geldiğinde bir geri arama etkinliği ayarlayın.
 cv2.namedWindow('image')
-cv2.setMouseCallback('image',draw_function)
+cv2.setMouseCallback('image',draw)
 #Pencerede görüntü gösteriliyor ve görüntüye çift tıklatıldığında, görüntü penceresinde renk adı ve RGB değerleri gösterilecek.
 while(1):
 
