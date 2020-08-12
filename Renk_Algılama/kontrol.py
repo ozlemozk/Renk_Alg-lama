@@ -44,7 +44,8 @@ def draw(event, x,y,flags,param):
         g = int(g)
         r = int(r)
        
- # Renk adını algılamak ve göstermek için mouse ile bir görüntünün üzerine geldiğinde bir geri arama etkinliği ayarlayın.
+    
+    # Renk adını algılamak ve göstermek için mouse ile bir görüntünün üzerine geldiğinde bir geri arama etkinliği ayarlayın.
 cv2.namedWindow('image')
 cv2.setMouseCallback('image',draw)
 #Pencerede görüntü gösteriliyor ve görüntüye çift tıklatıldığında, görüntü penceresinde renk adı ve RGB değerleri gösterilecek.
